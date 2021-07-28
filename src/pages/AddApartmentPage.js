@@ -1,16 +1,36 @@
-import { useState } from "react";          // <== IMPORT
+import { useState } from "react";
+import axios from 'axios';
+
+import { useHistory } from "react-router-dom";        // <==  IMPORT
+
 
 function AddApartmentPage() {
-  const [headline, setHeadline] = useState("");     // <== ADD
-  const [price, setPrice] = useState(1);         // <== ADD
+  const [headline, setHeadline] = useState("");
+  const [price, setPrice] = useState(1);
+  const history = useHistory();                      // <==  ADD
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = { title: headline, pricePerDay: price };
+    
+    axios
+      .post("https://ironbnb-m3.herokuapp.com/apartments", body)
+      .then((response) => {
+        // Reset the state
+        setHeadline("");
+        setPrice(1);
+      
+        // Navigate to the `/` page
+        history.push('/');                                // <== ADD        
+      });
+  };
 
 
   return (
     <div className="AddApartmentPage">
       <h3>Add New Apartment</h3>
       
-      {/*  👇  ADD 👇  */}
-      <form >
+      <form onSubmit={handleSubmit}>
         <label>Title</label>
         <input
           type="text"
