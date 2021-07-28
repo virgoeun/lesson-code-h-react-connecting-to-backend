@@ -4,6 +4,7 @@ import axios from "axios";
 function ApartmentsPage() {
   const [apartments, setApartments] = useState([]);
 
+  // This effect will run only once after the initial render 
   useEffect(() => {
     axios
       .get("https://ironbnb-m3.herokuapp.com/apartments")
@@ -11,7 +12,7 @@ function ApartmentsPage() {
         console.log("response.data", response.data);
         setApartments(response.data);
       });
-  }, []);
+  }, []);       // <--  [] means: Run the effect only once, after initial render
 
 
   return (
