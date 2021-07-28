@@ -1,16 +1,17 @@
 import { useState } from "react";
 import axios from 'axios';
-
-import { useHistory } from "react-router-dom";        // <==  IMPORT
+import { useHistory } from "react-router-dom";
 
 
 function AddApartmentPage() {
   const [headline, setHeadline] = useState("");
   const [price, setPrice] = useState(1);
-  const history = useHistory();                      // <==  ADD
+  const history = useHistory();
 
   const handleSubmit = (e) => {
+    // Prevent page reload on submit    
     e.preventDefault();
+    // Create the body for the POST request    
     const body = { title: headline, pricePerDay: price };
     
     axios
@@ -21,7 +22,7 @@ function AddApartmentPage() {
         setPrice(1);
       
         // Navigate to the `/` page
-        history.push('/');                                // <== ADD        
+        history.push('/');
       });
   };
 
