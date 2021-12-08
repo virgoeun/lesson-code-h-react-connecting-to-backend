@@ -1,12 +1,11 @@
 import { useState } from "react";
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 function AddApartmentPage() {
   const [headline, setHeadline] = useState("");
   const [price, setPrice] = useState(1);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     // Prevent page reload on submit    
@@ -22,7 +21,7 @@ function AddApartmentPage() {
         setPrice(1);
       
         // Navigate to the `/` page
-        history.push('/');
+        navigate('/');
       });
   };
 
